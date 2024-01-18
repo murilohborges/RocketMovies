@@ -4,7 +4,13 @@ import { Input } from '../../components/Input';
 import { ButtonText } from '../../components/ButtonText';
 import { FiLock, FiMail } from "react-icons/fi";
 
+import { useAuth } from "../../hooks/auth";
+
+
 export function SignIn(){
+  const data = useAuth();
+  console.log("meu contexto =>", data);
+
   return(
     <Container>
       <Menu>
@@ -20,11 +26,13 @@ export function SignIn(){
             placeholder="E-mail"
             type="text"
             icon={FiMail}
+            onChange={e => setEmail(e.target.value)}
           />
           <Input
             placeholder="Senha"
             type="password"
             icon={FiLock}
+            onChange={e => setPassword(e.target.value)}
           />
 
           <ButtonText title="Entrar"/>
