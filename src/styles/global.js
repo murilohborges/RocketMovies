@@ -7,6 +7,12 @@ export default createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Roboto Slab', serif;
 
+    :focus{
+      box-shadow: 0 0 0 0;
+      border: 0 none;
+      outline: 0;
+    }
+
   }
 
   body {
