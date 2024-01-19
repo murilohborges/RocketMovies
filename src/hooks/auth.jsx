@@ -39,7 +39,7 @@ function AuthProvider({ children }) {
         user: JSON.parse(user)
       })
     }
-  })
+  }, [])
 
   return (
     <AuthContext.Provider value={{ signIn, user: data.user }} >
