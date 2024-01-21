@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Container = styled.header`
   grid-area: header;
 
-  width: 100%;
+  width: auto;
   height: 116px;
   border-bottom: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_LINE};
 
@@ -12,7 +12,7 @@ export const Container = styled.header`
 
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: 40px;
   justify-content: center;
 
   > h1 {
@@ -50,42 +50,43 @@ export const Container = styled.header`
       }
     }
   }
+
+  > button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+  }
 `;
 
 export const Profile = styled(Link)`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   width: 300px;
   height: 68px;
   text-decoration: none;
   
-
-  strong {
-    color: ${({ theme }) => theme.COLORS.WHITE};
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-
-  span {
-    color: ${({ theme }) => theme.COLORS.GRAY_PLACEHOLDER};
-    font-size: 14px;
-    font-weight: 400;
-    cursor: pointer;
-  }
-
-  div {
-    
+  > .profile-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    gap: 10px;
+
+    strong {
+      color: ${({ theme }) => theme.COLORS.WHITE};
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+    }
+
   }
 
-  > img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-  }
+  
 `;

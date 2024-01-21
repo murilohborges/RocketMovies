@@ -24,7 +24,13 @@ function AuthProvider({ children }) {
         alert("Não foi possível entrar.")
       }
     }
+  }
 
+  function signOut(){
+    const token = localStorage.removeItem("@rocketmovies:token");
+    const user = localStorage.removeItem("@rocketmovies:user");
+
+    setData({});
   }
 
   useEffect(() => {
@@ -42,7 +48,7 @@ function AuthProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ signIn, user: data.user }} >
+    <AuthContext.Provider value={{ signIn, signOut, user: data.user }} >
       {children}
     </AuthContext.Provider>
   )

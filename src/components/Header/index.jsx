@@ -1,9 +1,13 @@
 import { Container, Profile } from './styles.js';
-import { Link } from 'react-router-dom';
+import { FiLogOut } from "react-icons/fi";
+import { useAuth } from '../../hooks/auth.jsx';
+
 export function Header () {
+  const { signOut } = useAuth();
+
   return (
     <Container>
-      <h1>RocketNotes</h1>
+      <h1>RocketMovies</h1>
 
       <div className="input-header">
         <input
@@ -12,14 +16,17 @@ export function Header () {
         />
       </div>
       
-      <Profile to="/profile">
-        <div>
+      <Profile >
+        <div className="profile-wrapper">
           <strong>Murilo Borges</strong>
-          <span>sair</span>
+          <img src="https://github.com/murilohborges.png" alt="Foto do usuário" to="/profile"/>
         </div>
-
-        <img src="https://github.com/murilohborges.png" alt="Foto do usuário" />
+        
       </Profile>
+
+      <button onClick={signOut}>
+        <FiLogOut />
+      </button>
     </Container>
   )
 }
