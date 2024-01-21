@@ -1,6 +1,7 @@
 import { Container, Profile } from './styles.js';
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from '../../hooks/auth.jsx';
+import { Link } from 'react-router-dom';
 
 export function Header () {
   const { signOut } = useAuth();
@@ -16,7 +17,7 @@ export function Header () {
         />
       </div>
       
-      <Profile >
+      <Profile to="/profile" >
         <div className="profile-wrapper">
           <strong>Murilo Borges</strong>
           <img src="https://github.com/murilohborges.png" alt="Foto do usuário" to="/profile"/>

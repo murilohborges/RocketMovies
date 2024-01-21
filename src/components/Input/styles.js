@@ -17,6 +17,7 @@ export const Container = styled.div`
 
     padding: 19px auto;
     margin-left: 14px;
+    margin-right: 14px;
 
     color: ${({ theme }) => theme.COLORS.WHITE};
     background: transparent;
