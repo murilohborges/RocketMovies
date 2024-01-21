@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Note } from "../../components/Note";
 import { FiPlus } from "react-icons/fi";
+import { api } from "../../service/api";
 
 
 export function Home() {

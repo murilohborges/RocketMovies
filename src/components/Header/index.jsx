@@ -2,9 +2,12 @@ import { Container, Profile } from './styles.js';
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from '../../hooks/auth.jsx';
 import { Link } from 'react-router-dom';
+import avatarPlaceholder from '../../assets/avatarPlaceholder.svg';
+import { api } from '../../service/api.js';
 
 export function Header () {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
+  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 
   return (
     <Container>
@@ -20,7 +23,7 @@ export function Header () {
       <Profile to="/profile" >
         <div className="profile-wrapper">
           <strong>Murilo Borges</strong>
-          <img src="https://github.com/murilohborges.png" alt="Foto do usuário" to="/profile"/>
+          <img src={avatarUrl} alt={user.name} to="/profile"/>
         </div>
         
       </Profile>
