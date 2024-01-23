@@ -21,20 +21,46 @@ export function New(){
   const [newTag, setNewTag] = useState("");
 
   async function handleNewNote(){
-    const response = await api.post("/notes", {
+    if(!title) {
+      return alert("Digite o título do filme");
+    }
+
+    if(!description) {
+      return alert("Digite a descrição do filme");
+    }
+
+    if(!rating) {
+      return alert("Digite a nota do filme");
+    }
+
+    if(newTag) {
+      return alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio");
+    }
+
+
+    api.post("/notes", {
       title,
       description,
       rating,
       tags
-    })
+    }).then(() => {
+      alert("Nota criada com sucesso");
+      navigate("/");
+    }).catch(error => {
+      if(error.response){
+        alert(error.response.data.message);
+        return 
+      }else {
+        alert("Não foi possível cadastrar");
+        return 
+      }
+    });
 
-    console.log(response.data)
-    alert("Nota criada com sucesso");
-    navigate("/");
+    
   }
 
   function handleAddTag(){
-    setTags(prevState => [...prevState, newTag]);
+    setTags((prevState) => [...prevState, newTag]);
     setNewTag("");
   }
 
