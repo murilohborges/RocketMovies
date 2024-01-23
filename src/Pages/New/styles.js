@@ -110,6 +110,7 @@ export const Section = styled.div`
     border-radius: 8px;
     padding: 16px;
     width: 100%;
+    flex-wrap: wrap;
 
     display: flex;
     align-items: center;

@@ -104,7 +104,7 @@ export function New(){
           <button className="delete-button" title="Excluir filme">
             Excluir filme
           </button>
-          <ButtonText title="Salvar alterações" />
+          <ButtonText title="Salvar alterações" onClick={handleNewNote} />
 
         </div>
         
