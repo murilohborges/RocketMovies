@@ -1,6 +1,6 @@
 import { Container, Content, Form, Section } from './styles';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
 import { NoteItem } from '../../components/NoteItem';
@@ -8,9 +8,30 @@ import { Textarea } from '../../components/Textarea';
 import { ButtonText } from '../../components/ButtonText';
 import { FiArrowLeft } from "react-icons/fi";
 
+import { api } from '../../service/api';
+
 export function New(){
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [rating, setRating] = useState("");
+
+  const navigate = useNavigate();
+
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
+
+  async function handleNewNote(){
+    const response = await api.post("/notes", {
+      title,
+      description,
+      rating,
+      tags
+    })
+
+    console.log(response.data)
+    alert("Nota criada com sucesso");
+    navigate("/");
+  }
 
   function handleAddTag(){
     setTags(prevState => [...prevState, newTag]);
@@ -40,15 +61,18 @@ export function New(){
             <Input
               type="text"
               placeholder="Título"
+              onChange={e => setTitle(e.target.value)}
             />
             <Input
               type="text"
               placeholder="Sua nota (de 1 a 5)"
+              onChange={e => setRating(e.target.value)}
             />
           </div>
 
           <Textarea 
             placeholder="Observações"
+            onChange={e => setDescription(e.target.value)}
           />
         </Form>
 
@@ -67,7 +91,7 @@ export function New(){
             }
             <NoteItem 
               placeholder="Nova tag" 
-              isNew
+              $isNew
               value={newTag}
               onChange={e => setNewTag(e.target.value)}
               onClick={handleAddTag}
