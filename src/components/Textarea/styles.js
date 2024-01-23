@@ -12,11 +12,12 @@ export const Container = styled.textarea`
 
   margin-bottom: 8px;
   border-radius: 10px;
+  padding: 19px 16px;
+  font-size: 16px;
 
   &::placeholder{
     color: ${({ theme }) => theme.COLORS.GRAY_PLACEHOLDER};
     font-size: 16px;
-    padding: 19px 16px;
     
   }
 `;
