@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Container, Profile } from './styles.js';
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from '../../hooks/auth.jsx';
@@ -5,9 +6,19 @@ import { Link } from 'react-router-dom';
 import avatarPlaceholder from '../../assets/avatarPlaceholder.svg';
 import { api } from '../../service/api.js';
 
-export function Header () {
+export function Header (props) {
   const { signOut, user } = useAuth();
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+
+  const [ search, setSearch ] = useState("");
+
+  useEffect(() => {
+    async function fetchSearch(){
+      props.handleSearchNote(search)
+    }
+
+    fetchSearch();
+  },[search]);
 
   return (
     <Container>
@@ -17,6 +28,7 @@ export function Header () {
         <input
           type="text" 
           placeholder='Pesquisar pelo título'
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       
