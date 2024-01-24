@@ -5,16 +5,38 @@ import { Header } from "../../components/Header";
 import { Note } from "../../components/Note";
 import { FiPlus } from "react-icons/fi";
 import { api } from "../../service/api";
+import { useNavigate } from 'react-router-dom';
 
 
 export function Home() {
-  
+  const [data, setData] = useState("");
+  const [notes, setNotes] = useState([]);
+
+  const navigate = useNavigate();
+
+  const childToParent = childdata => {
+    setData(childdata);
+    console.log(data);
+  }
+
+  function handleDetails(id){
+    navigate(`/Details/${id}`);
+  }
+
+  useEffect(() => {
+    async function fetchNotes(){
+      const response = await api.get(`/notes?title=${data}`);
+      setNotes(response.data)
+    }
+
+    fetchNotes();
+  }, [data]);
 
   
 
   return(
     <Container>
-      <Header></Header>
+      <Header childToParent={childToParent}></Header>
 
       <div className="title">
           <h1>Meus filmes</h1>
@@ -25,37 +47,15 @@ export function Home() {
       </div>
 
       <main>
-        
-        <Note data={{
-          title: 'Velozes e furiosos',
-          description: "Brian O'Conner é um policial que se infiltra no submundo dos rachas de rua para investigar uma série de furtos. Enquanto tenta ganhar o respeito e a confiança do líder Dom Toretto, ele corre o risco de ser desmascarado",
-          rating: 1,
-          tags: [
-            {id: 1, name: 'Ação'},
-            {id: 2, name: 'Carros'},
-            {id: 3, name: 'Família'},
-          ]
-        }}/>
-        <Note data={{
-          title: 'Velozes e furiosos',
-          description: "Brian O'Conner é um policial que se infiltra no submundo dos rachas de rua para investigar uma série de furtos. Enquanto tenta ganhar o respeito e a confiança do líder Dom Toretto, ele corre o risco de ser desmascarado",
-          rating: 1,
-          tags: [
-            {id: 1, name: 'Ação'},
-            {id: 2, name: 'Carros'},
-            {id: 3, name: 'Família'},
-          ]
-        }}/>
-        <Note data={{
-          title: 'Velozes e furiosos',
-          description: "Brian O'Conner é um policial que se infiltra no submundo dos rachas de rua para investigar uma série de furtos. Enquanto tenta ganhar o respeito e a confiança do líder Dom Toretto, ele corre o risco de ser desmascarado",
-          rating: 1,
-          tags: [
-            {id: 1, name: 'Ação'},
-            {id: 2, name: 'Carros'},
-            {id: 3, name: 'Família'},
-          ]
-        }}/>
+        {
+          notes.map(note => (
+            <Note
+              key={String(note.id)}
+              data={note} 
+              onClick={() => handleDetails(note.id)}
+            />
+          ))
+        }
         
         
       </main>

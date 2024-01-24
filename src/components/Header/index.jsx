@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import avatarPlaceholder from '../../assets/avatarPlaceholder.svg';
 import { api } from '../../service/api.js';
 
-export function Header (props) {
+export function Header ({childToParent}) {
   const { signOut, user } = useAuth();
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 
@@ -14,7 +14,7 @@ export function Header (props) {
 
   useEffect(() => {
     async function fetchSearch(){
-      props.handleSearchNote(search)
+      childToParent(search);
     }
 
     fetchSearch();

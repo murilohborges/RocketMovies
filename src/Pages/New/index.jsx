@@ -68,15 +68,11 @@ export function New(){
     setTags(prevState => prevState.filter(link => link !== deleted));
   }
 
-  const [data, setData] = useState("");
-
-  const childToParent = (childdata) => {
-    setData(childdata);
-  };
+  
 
   return(
     <Container>
-      <Header handleSearchNote={childToParent}>
+      <Header >
 
       </Header>
 
