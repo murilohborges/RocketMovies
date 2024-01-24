@@ -70,7 +70,7 @@ export function New(){
 
   const [data, setData] = useState("");
 
-  const childToParent = function childToParent(childdata) {
+  const childToParent = (childdata) => {
     setData(childdata);
   };
 
