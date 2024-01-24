@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Container, Profile } from './styles.js';
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from '../../hooks/auth.jsx';
-import { Link } from 'react-router-dom';
 import avatarPlaceholder from '../../assets/avatarPlaceholder.svg';
 import { api } from '../../service/api.js';
 
@@ -14,7 +13,9 @@ export function Header ({childToParent}) {
 
   useEffect(() => {
     async function fetchSearch(){
-      childToParent(search);
+      if(childToParent) {
+        childToParent(search);
+      }
     }
 
     fetchSearch();

@@ -24,10 +24,12 @@ export const Content = styled.div`
   align-items: flex-start;
   overflow-y: auto;
   
-  > a {
+  > button {
     display: flex;
     align-items: center;
     gap: 8px;
+    background: none;
+    border: none;
 
     margin-bottom: 24px;
 
@@ -101,6 +103,7 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  width: 100%;
 
   margin-bottom: 40px;
 

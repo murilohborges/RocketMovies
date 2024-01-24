@@ -1,70 +1,90 @@
 import { Container, Content, Title, Historic, Main, Text, StarFilled, StarEmpty } from './styles';
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { api } from '../../service/api.js';
 import { Header } from '../../components/Header';
 import { Tag } from '../../components/Tag';
 import { FiArrowLeft, FiClock } from "react-icons/fi";
 
 export function Details(){
+  const [data, setData] = useState(null);
+  const [tags, setTags] = useState([]);
+
+  const params = useParams();
+  const navigate= useNavigate();
+
+  function handleBack(){
+    navigate("/")
+  }
+
+  useEffect(() => {
+    async function fetchNote(){
+      const response = await api.get(`/notes/${params.id}`);
+      setData(response.data);
+    }
+
+    fetchNote();
+  }, [])
+
   return(
     <Container>
-      <Header>
+      <Header ></Header>
 
-      </Header>
-
-      <Content>
-        <a href="/">
-          <FiArrowLeft />
-          Voltar
-        </a>
+      {
+        data &&
+        <Content>
+          <button onClick={handleBack}>
+            <FiArrowLeft />
+            Voltar
+          </button>
         
-        <Title>
+          <Title>
 
-          <h1>Interestelar</h1>
+            <h1>{data.title}</h1>
 
-          <div className="rating">
-            { 
-              4 &&
-              <>{Array.from({ length: 5 }).map((_, index) => 4 >= index + 1 ? <StarFilled/> : <StarEmpty/> )}</>
-            }
-          </div>
+            <div className="rating">
+              { 
+                data.rating &&
+                <>{Array.from({ length: 5 }).map((_, index) => data.rating >= index + 1 ? <StarFilled/> : <StarEmpty/> )}</>
+              }
+            </div>
 
-        </Title>
+          </Title>
 
-        <Historic>
-          
-          <div className="author">
-            <img src="https://github.com/murilohborges.png" alt="Foto do Autor" />
-            <span>Por Murilo Henrique</span>
-          </div>
-
-          <div className="date">
-            <FiClock/>
-            <span>23/05/22 às 08:00</span>
-          </div>
-
-        </Historic>
-
-        <Main>
-          
-          <div className="tags">
-            <Tag title="Ficção Científica" />
-            <Tag title="Drama" />
-            <Tag title="Família" />
-          </div>
+          <Historic>
             
-          <Text>
-            <article>Pragas nas colheitas fizeram a civilização humana regredir para uma sociedade agrária em futuro de data desconhecida. Cooper, ex-piloto da NASA, tem uma fazenda com sua família. Murphy, a filha de dez anos de Cooper, acredita que seu quarto está assombrado por um fantasma que tenta se comunicar com ela. Pai e filha descobrem que o "fantasma" é uma inteligência desconhecida que está enviando mensagens codificadas através de radiação gravitacional, deixando coordenadas em binário que os levam até uma instalação secreta da NASA liderada pelo professor John Brand. O cientista revela que um buraco de minhoca foi aberto perto de Saturno e que ele leva a planetas que podem oferecer condições de sobrevivência para a espécie humana. As "missões Lázaro" enviadas anos antes identificaram três planetas potencialmente habitáveis orbitando o buraco negro Gargântua: Miller, Edmunds e Mann – nomeados em homenagem aos astronautas que os pesquisaram. Brand recruta Cooper para pilotar a nave espacial Endurance e recuperar os dados dos astronautas; se um dos planetas se mostrar habitável, a humanidade irá seguir para ele na instalação da NASA, que é na realidade uma enorme estação espacial. A partida de Cooper devasta Murphy.</article>
+            <div className="author">
+              <img src="https://github.com/murilohborges.png" alt="Foto do Autor" />
+              <span>Por Murilo Henrique</span>
+            </div>
 
-            <article>
-              Além de Cooper, a tripulação da Endurance é formada pela bióloga Amelia, filha de Brand; o cientista Romilly, o físico planetário Doyle, além dos robôs TARS e CASE. Eles entram no buraco de minhoca e se dirigem a Miller, porém descobrem que o planeta possui enorme dilatação gravitacional temporal por estar tão perto de Gargântua: cada hora na superfície equivale a sete anos na Terra. Eles entram em Miller e descobrem que é inóspito já que é coberto por um oceano raso e agitado por ondas enormes. Uma onda atinge a tripulação enquanto Amelia tenta recuperar os dados de Miller, matando Doyle e atrasando a partida. Ao voltarem para a Endurance, Cooper e Amelia descobrem que 23 anos se passaram.
-            </article>
+            <div className="date">
+              <FiClock/>
+              <span>23/05/22 às 08:00</span>
+            </div>
+
+          </Historic>
+
+          <Main>
             
-          </Text>
+            <div className="tags">
+              
+              {
+                data.tags && 
+                data.tags.map(tag => <Tag key={tag.id} title={tag.name}/>)
+                
+              }
+              
+            </div>
+              
+            <Text>
+              <article>{data.description}</article>
+            </Text>
 
-        </Main>
+          </Main>
 
       </Content>
-
-      
+      }
 
     </Container>
   )
