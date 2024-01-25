@@ -20,6 +20,22 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: flex-start;
   overflow-y: auto;
+
+  > .back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    text-decoration: none;
+    color: ${({ theme }) => theme.COLORS.PINK};
+    font-size: 16px;
+    font-weight: 400;
+  }
   
   > a {
     display: flex;

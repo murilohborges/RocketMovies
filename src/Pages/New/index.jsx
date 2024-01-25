@@ -68,6 +68,9 @@ export function New(){
     setTags(prevState => prevState.filter(link => link !== deleted));
   }
 
+  function handleBack(){
+    navigate(-1)
+  }
   
 
   return(
@@ -77,10 +80,10 @@ export function New(){
       </Header>
 
       <Content>
-        <Link to="/">
+        <button className='back-button' onClick={handleBack}>
           <FiArrowLeft />
-          Voltar
-        </Link>
+            Voltar
+        </button>
 
         <Form>
           <h1>Novo filme</h1>

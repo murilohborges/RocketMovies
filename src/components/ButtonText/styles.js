@@ -10,6 +10,7 @@ export const Container = styled.div`
   height: 56px;
 
   border-radius: 8px;
+  padding: 5px;
 
   background-color: ${({ theme }) => theme.COLORS.PINK};
   cursor: pointer;

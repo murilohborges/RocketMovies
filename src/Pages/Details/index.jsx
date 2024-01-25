@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { api } from '../../service/api.js';
 import { Header } from '../../components/Header';
 import { Tag } from '../../components/Tag';
+import { ButtonText } from '../../components/ButtonText'
 import { FiArrowLeft, FiClock } from "react-icons/fi";
+import { useAuth } from '../../hooks/auth.jsx';
 
 export function Details(){
   const [data, setData] = useState(null);
@@ -12,9 +14,19 @@ export function Details(){
 
   const params = useParams();
   const navigate= useNavigate();
+  const { user } = useAuth();
 
   function handleBack(){
-    navigate("/")
+    navigate(-1)
+  }
+
+  async function handleRemove(){
+    const confirm = window.confirm("Deseja realmente remover a nota?");
+
+    if(confirm) {
+      await api.delete(`/notes/${params.id}`);
+      navigate("/");
+    }
   }
 
   useEffect(() => {
@@ -33,10 +45,16 @@ export function Details(){
       {
         data &&
         <Content>
-          <button onClick={handleBack}>
-            <FiArrowLeft />
-            Voltar
-          </button>
+
+          <div className="wrapper-button">
+            <button onClick={handleBack}>
+              <FiArrowLeft />
+              Voltar
+            </button>
+
+            <ButtonText title={"Excluir nota"} onClick={handleRemove} />
+          </div>
+          
         
           <Title>
 
@@ -54,13 +72,13 @@ export function Details(){
           <Historic>
             
             <div className="author">
-              <img src="https://github.com/murilohborges.png" alt="Foto do Autor" />
-              <span>Por Murilo Henrique</span>
+              <img src={`${api.defaults.baseURL}/files/${user.avatar}`} alt="Foto do Autor" />
+              <span>Por {user.name}</span>
             </div>
 
             <div className="date">
               <FiClock/>
-              <span>23/05/22 às 08:00</span>
+              <span>{data.created_at}</span>
             </div>
 
           </Historic>

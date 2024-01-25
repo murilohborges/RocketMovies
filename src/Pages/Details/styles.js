@@ -23,21 +23,27 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: flex-start;
   overflow-y: auto;
-  
-  > button {
+
+  > .wrapper-button {
     display: flex;
+    gap: 20px;
     align-items: center;
-    gap: 8px;
-    background: none;
-    border: none;
+    
+    > button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
 
-    margin-bottom: 24px;
-
-    text-decoration: none;
-    color: ${({ theme }) => theme.COLORS.PINK};
-    font-size: 16px;
-    font-weight: 400;
+      text-decoration: none;
+      color: ${({ theme }) => theme.COLORS.PINK};
+      font-size: 16px;
+      font-weight: 400;
+    }
   }
+  
+  
 `;
 
 export const Title = styled.div`

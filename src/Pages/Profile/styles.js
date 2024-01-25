@@ -11,7 +11,7 @@ export const Container = styled.div`
     background-color: ${({ theme }) => theme.COLORS.PINK_DARK};
     position: relative;
 
-    > a {
+    > button {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -19,7 +19,9 @@ export const Container = styled.div`
     position: absolute;
     left: 168px;
     top: 64px;
-    
+    border: none;
+    background: none;
+    cursor: pointer;
 
     text-decoration: none;
     color: ${({ theme }) => theme.COLORS.PINK};
