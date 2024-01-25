@@ -4,12 +4,14 @@ import { FiLogOut } from "react-icons/fi";
 import { useAuth } from '../../hooks/auth.jsx';
 import avatarPlaceholder from '../../assets/avatarPlaceholder.svg';
 import { api } from '../../service/api.js';
+import { useNavigate } from "react-router-dom";
 
 export function Header ({childToParent}) {
   const { signOut, user } = useAuth();
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 
   const [ search, setSearch ] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchSearch(){
@@ -20,6 +22,11 @@ export function Header ({childToParent}) {
 
     fetchSearch();
   },[search]);
+
+  function handleSignOut() {
+    navigate("/");
+    signOut();
+  }
 
   return (
     <Container>
@@ -35,13 +42,13 @@ export function Header ({childToParent}) {
       
       <Profile to="/profile" >
         <div className="profile-wrapper">
-          <strong>Murilo Borges</strong>
+          <strong>{user.name}</strong>
           <img src={avatarUrl} alt={user.name} to="/profile"/>
         </div>
         
       </Profile>
 
-      <button onClick={signOut}>
+      <button onClick={handleSignOut}>
         <FiLogOut />
       </button>
     </Container>
