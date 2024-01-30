@@ -63,7 +63,7 @@ export function Details(){
             <div className="rating">
               { 
                 data.rating &&
-                <>{Array.from({ length: 5 }).map((_, index) => data.rating >= index + 1 ? <StarFilled/> : <StarEmpty/> )}</>
+                <>{Array.from({ length: 5 }).map((_, index) => data.rating >= index + 1 ? <StarFilled key={index}/> : <StarEmpty key={index}/> )}</>
               }
             </div>
 

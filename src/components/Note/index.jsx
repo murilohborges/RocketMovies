@@ -3,15 +3,15 @@ import { Tag } from '../Tag';
 
 export function Note({ data, ...rest}){
   return(
-    <Container {...rest}>
-      <h1>{data.title}</h1>
+    <Container {...rest} >
+      <h1 >{data.title}</h1>
 
       
         
       <div className="rating">
         { 
           data.rating &&
-          <>{Array.from({ length: 5 }).map((_, index) => data.rating >= index + 1 ? <StarFilled/> : <StarEmpty/> )}</>
+          <>{Array.from({ length: 5 }).map((_, index) => data.rating >= index + 1 ? <StarFilled key={index}/> : <StarEmpty key={index}/> )}</>
         }
       </div>
 
