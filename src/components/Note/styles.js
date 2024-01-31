@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import starFilled from "../../assets/starFilled.svg";
-import starEmpty from "../../assets/starEmpty.svg";
+
 
 export const Container = styled.div`
   
@@ -40,20 +39,12 @@ export const Container = styled.div`
     display: flex;
     gap: 8px;
   }
+
+  > svg {
+    height: 12px;
+    width: 12px;
+    background-size: cover;
+  }
   
 
-`;
-
-export const StarFilled = styled.div`
-  height: 12px;
-  width: 12px;
-  background: url(${starFilled}) center center;
-  background-size: cover;
-`;
-
-export const StarEmpty = styled.div`
-  height: 12px;
-  width: 12px;
-  background: url(${starEmpty}) center center;
-  background-size: cover;
 `;

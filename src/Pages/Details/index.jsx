@@ -1,4 +1,4 @@
-import { Container, Content, Title, Historic, Main, Text, StarFilled, StarEmpty } from './styles';
+import { Container, Content, Title, Historic, Main, Text } from './styles';
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { api } from '../../service/api.js';
@@ -7,6 +7,9 @@ import { Tag } from '../../components/Tag';
 import { ButtonText } from '../../components/ButtonText'
 import { FiArrowLeft, FiClock } from "react-icons/fi";
 import { useAuth } from '../../hooks/auth.jsx';
+
+import starFilled from "../../assets/starFilled.svg";
+import starEmpty from "../../assets/starEmpty.svg";
 
 export function Details(){
   const [data, setData] = useState(null);
@@ -63,7 +66,7 @@ export function Details(){
             <div className="rating">
               { 
                 data.rating &&
-                <>{Array.from({ length: 5 }).map((_, index) => data.rating >= index + 1 ? <StarFilled key={index}/> : <StarEmpty key={index}/> )}</>
+                <>{Array.from({ length: 5 }).map((_, index) => data.rating >= index + 1 ? <img src={starFilled}/> : <img src={starEmpty}/> )}</>
               }
             </div>
 

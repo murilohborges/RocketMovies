@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import starFilled from "../../assets/starFilled.svg";
-import starEmpty from "../../assets/starEmpty.svg";
+
 
 
 export const Container = styled.div`
@@ -28,6 +27,7 @@ export const Content = styled.div`
     display: flex;
     gap: 20px;
     align-items: center;
+    margin-bottom: 20px;
     
     > button {
       display: flex;
@@ -63,6 +63,12 @@ export const Title = styled.div`
     display: flex;
     flex-direction: row;
     gap: 6px;
+
+    > svg {
+      height: 20px;
+      width: 20px;
+      background-size: cover;
+    }
   }
 `;
 
@@ -133,18 +139,4 @@ export const Text = styled.div`
     width: 98%;
   }
   
-`;
-
-export const StarFilled = styled.div`
-  height: 20px;
-  width: 20px;
-  background: url(${starFilled}) center center;
-  background-size: cover;
-`;
-
-export const StarEmpty = styled.div`
-  height: 20px;
-  width: 20px;
-  background: url(${starEmpty}) center center;
-  background-size: cover;
 `;
